@@ -1,16 +1,14 @@
 'use strict';
 
-const _ = require('lodash');
 const ShellCommand = require('./ShellCommand');
 const ShellCommands = require('./ShellCommands');
-const ShellKeyPair = require('./ShellKeyPair');
 
 function command(cmd) {
-    return new ShellCommand(parseCmd(cmd));
+    return ShellCommand.parse(cmd);
 }
 
 function commands(cmds, operator) {
-    return new ShellCommands(cmds.map(command), operator);
+    return ShellCommands.parse(cmds, operator);
 }
 
 function pipe(cmds) {
@@ -27,28 +25,6 @@ function or(cmds) {
 
 function and(cmds) {
     return commands(cmds, ' && ');
-}
-
-function parseCmd(cmd) {
-    if (!_.isArray(cmd)) {
-        throw new Error('cmd needs to be an array');
-    }
-
-    const args = [];
-
-    for (let part of cmd) {
-        if (_.isString(part)) {
-            args.push(part);
-        } else if (_.isPlainObject(part) || _.isMap(part)) {
-            args.push(ShellKeyPair.parse(part));
-        } else if (_.isArray(part)) {
-            args.push(command(part));
-        } else if (part instanceof ShellCommand) {
-            args.push(part);
-        }
-    }
-
-    return args;
 }
 
 module.exports = { command, commands, and, or, all, pipe };

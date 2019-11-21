@@ -2,9 +2,10 @@
 
 const _ = require('lodash');
 const { quote } = require('shell-quote');
-const BaseShell = require('./BaseShell');
+const IShellCommand = require('./IShellCommand');
+const ShellKeyPair = require('./ShellKeyPair');
 
-class ShellCommand extends BaseShell {
+class ShellCommand extends IShellCommand {
     constructor(cmd) {
         super();
 
@@ -15,38 +16,56 @@ class ShellCommand extends BaseShell {
         this._cmd = cmd;
     }
 
-    get cmd() {
+    static parse(cmdArray) {
+        if (cmdArray instanceof ShellCommand) {
+            return cmdArray;
+        }
+
+        if (!_.isArray(cmdArray)) {
+            throw new Error('cmd needs to be an array');
+        }
+
         const args = [];
 
-        for (let part of this._cmd) {
-            if (_.isString(part)) {
-                args.push(part);
-            } else if (part instanceof BaseShell) {
-                let { special } = part;
-
-                if (!_.isArray(special)) {
-                    special = [special];
-                }
-
-                args.push(...special);
-            } else {
-                throw new Error('incorrect');
+        for (let cmd of cmdArray) {
+            if (_.isString(cmd)) {
+                args.push(cmd);
+            } else if (_.isPlainObject(cmd) || _.isMap(cmd)) {
+                args.push(ShellKeyPair.parse(cmd));
+            } else if (_.isArray(cmd)) {
+                args.push(ShellCommand.parse(cmd));
+            } else if (cmd instanceof IShellCommand) {
+                args.push(cmd);
             }
         }
 
-        return args;
+        return new ShellCommand(args);
     }
 
-    quote() {
-        return quote(this.cmd);
-    }
+    compile() {
+        if (!this._compiled) {
+            const args = [];
 
-    get special() {
-        return this.quote();
-    }
+            for (let cmd of this._cmd) {
+                if (_.isString(cmd)) {
+                    args.push(cmd);
+                } else if (cmd instanceof IShellCommand) {
+                    let compiled = cmd.compile();
 
-    get [Symbol.toStringTag]() {
-        return this.quote();
+                    if (!_.isArray(compiled)) {
+                        compiled = [compiled];
+                    }
+
+                    args.push(...compiled);
+                } else {
+                    throw new Error('incorrect');
+                }
+            }
+
+            this._compiled = quote(args);
+        }
+
+        return this._compiled;
     }
 }
 

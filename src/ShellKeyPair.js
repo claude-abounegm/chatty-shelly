@@ -1,9 +1,9 @@
 'use strict';
 
 const _ = require('lodash');
-const ShellCommand = require('./ShellCommand');
+const IShellCommand = require('./IShellCommand');
 
-class ShellKeyPair extends ShellCommand {
+class ShellKeyPair extends IShellCommand {
     constructor(arr) {
         super(arr);
     }
@@ -23,20 +23,20 @@ class ShellKeyPair extends ShellCommand {
         return new this(keyPairs);
     }
 
-    get cmd() {
-        return this._cmd.map(([key, value]) => {
-            key = String(key).trim();
+    compile() {
+        if (!this._compiled) {
+            this._compiled = this._cmd.map(([key, value]) => {
+                key = String(key).trim();
 
-            if (!key.length > 0) {
-                throw new Error('key needs to be a valid string');
-            }
+                if (!key.length > 0) {
+                    throw new Error('key needs to be a valid string');
+                }
 
-            return `${key}=${value}`;
-        });
-    }
+                return `${key}=${value}`;
+            });
+        }
 
-    get special() {
-        return this.cmd;
+        return this._compiled;
     }
 }
 

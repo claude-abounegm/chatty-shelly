@@ -8,15 +8,8 @@ const _ = require('lodash');
 const Shell = require('../src/Shell');
 require('colors');
 
-async function test1() {
-    let cmd = Shell.and([
-        ['echo', 'should print1'],
-        Shell.or([
-            'false',
-            ['echo', 'should print2'],
-            ['echo', 'should not print']
-        ])
-    ]);
+function test1() {
+    const cmd = Shell.command(['bash', '-c', ['echo', 'hello world']]);
 
     console.log(cmd);
 }
@@ -31,6 +24,19 @@ function test2() {
 }
 
 async function test3() {
+    let cmd = Shell.and([
+        ['echo', 'should print1'],
+        Shell.or([
+            'false',
+            ['echo', 'should print2'],
+            ['echo', 'should not print']
+        ])
+    ]);
+
+    console.log(cmd);
+}
+
+async function test4() {
     const externalCommand = [
         'bash',
         '-c',
@@ -48,13 +54,13 @@ async function test3() {
             'echo',
             Shell.all([['export', { HOME: `/home/${user}` }], externalCommand])
         ],
-        ['bash']
+        'bash'
     ]);
 
     console.log(cmd);
 }
 
-test3();
+test4();
 
 // let count = 0;
 // async function exec(cmd) {
