@@ -3,10 +3,21 @@
 const ShellCommand = require('./ShellCommand');
 const ShellCommands = require('./ShellCommands');
 
+/**
+ *
+ * @param {[]} cmd
+ * @returns {ShellCommand}
+ */
 function command(cmd) {
     return ShellCommand.parse(cmd);
 }
 
+/**
+ *
+ * @param {[]} cmds
+ * @param {string} operator
+ * @returns {ShellCommands}
+ */
 function commands(cmds, operator) {
     return ShellCommands.parse(cmds, operator);
 }

@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const { quote } = require('shell-quote');
 const IShellCommand = require('./IShellCommand');
-const ShellKeyPair = require('./ShellKeyPair');
+const ShellKeyPair = require('./ShellKeyValuePair');
 
 class ShellCommand extends IShellCommand {
     constructor(cmd) {

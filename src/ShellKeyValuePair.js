@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const IShellCommand = require('./IShellCommand');
 
-class ShellKeyPair extends IShellCommand {
+class ShellKeyValuePair extends IShellCommand {
     constructor(arr) {
         super(arr);
     }
@@ -40,4 +40,4 @@ class ShellKeyPair extends IShellCommand {
     }
 }
 
-module.exports = ShellKeyPair;
+module.exports = ShellKeyValuePair;
