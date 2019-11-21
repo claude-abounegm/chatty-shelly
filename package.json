@@ -1,5 +1,5 @@
 {
-    "name": "chatty-shelly",
+    "name": "commander-shelly",
     "version": "1.0.0",
     "description": "A new way of writing Shell commands, in an ORM-like manner.",
     "main": "src",
@@ -8,12 +8,11 @@
         "pretty": "gulp pretty",
         "test": "mocha",
         "test-all": "mocha ./test/**/*.js",
-        "test-all:coverage": "nyc --reporter=html --reporter=text npm run test-all",
-        "coverage": "nyc report --reporter=text-lcov | coveralls"
+        "test-all:coverage": "nyc --reporter=html --reporter=text npm run test-all"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/claude-abounegm/chatty-shelly.git"
+        "url": "git+https://github.com/claude-abounegm/commander-shelly.git"
     },
     "keywords": [
         "ORM",
@@ -24,9 +23,9 @@
     "author": "Claude Abounegm",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/claude-abounegm/chatty-shelly/issues"
+        "url": "https://github.com/claude-abounegm/commander-shelly/issues"
     },
-    "homepage": "https://github.com/claude-abounegm/chatty-shelly#readme",
+    "homepage": "https://github.com/claude-abounegm/commander-shelly#readme",
     "dependencies": {
         "colors": "^1.4.0",
         "fs-extra": "^8.1.0",
