@@ -12,7 +12,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/claude-abounegm/commander-shelly.git"
+        "url": "git+https://github.com/claude-abounegm/node-shell-quote.git"
     },
     "keywords": [
         "Node.js",
@@ -31,7 +31,7 @@
         "lodash": "^4.17.15",
         "request": "^2.88.0",
         "request-promise-native": "^1.0.7",
-        "shell-quote": "git+https://github.com/claude-abounegm/commander-shelly.git"
+        "shell-quote": "git+https://github.com/claude-abounegm/node-shell-quote.git"
     },
     "devDependencies": {
         "chai": "^4.2.0",
