@@ -4,73 +4,80 @@
 'use strict';
 
 const _ = require('lodash');
-// const { expect } = require('chai');
+const { expect } = require('chai');
 const Shell = require('../src/Shell');
 require('colors');
 
-function test1() {
-    const cmd = Shell.command(['bash', '-c', ['echo', 'hello world']]);
+describe('commander-shelly', function() {
+    it('test1', function() {
+        const cmd = Shell.command(['bash', '-c', ['echo', 'hello world']]);
 
-    console.log(cmd);
-}
+        expect(cmd.toString()).equal(`bash -c "echo 'hello world'"`);
+    });
 
-function test2() {
-    const cmd = Shell.pipe([
-        ['echo', 'hello world'],
-        ['grep', 'world']
-    ]);
+    it('test2', function() {
+        const cmd = Shell.pipe([
+            ['echo', 'hello world'],
+            ['grep', 'world']
+        ]);
 
-    console.log(cmd);
-}
+        expect(cmd.toString()).equal(`echo 'hello world' | grep world`);
+    });
 
-async function test3() {
-    let cmd = Shell.and([
-        ['echo', 'should print1'],
-        Shell.or([
-            'false',
-            ['echo', 'should print2'],
-            ['echo', 'should not print']
-        ])
-    ]);
+    it('test3', function() {
+        let cmd = Shell.and([
+            ['echo', 'should print1'],
+            Shell.or([
+                'false',
+                ['echo', 'should print2'],
+                ['echo', 'should not print']
+            ])
+        ]);
 
-    console.log(cmd);
-}
+        expect(cmd.toString()).equal(
+            `echo 'should print1' && false || echo 'should print2' || echo 'should not print'`
+        );
+    });
 
-async function test4() {
-    const externalCommand = [
-        'bash',
-        '-c',
-        [
-            'echo',
-            '--username=hello world',
-            { '--pass': "hell'o1 ${HOME}" },
-            'hello world'
-        ]
-    ];
+    it('test4', function test4() {
+        const externalCommand = [
+            'bash',
+            '-c',
+            [
+                'echo',
+                '--username=hello world',
+                { '--pass': "hell'o1 ${HOME}" },
+                'hello world'
+            ]
+        ];
 
-    const user = 'foo 22';
-    const cmd = Shell.pipe([
-        [
-            'echo',
-            Shell.all([['export', { HOME: `/home/${user}` }], externalCommand])
-        ],
-        'bash'
-    ]);
+        const user = 'foo 22';
+        const cmd = Shell.pipe([
+            [
+                'echo',
+                Shell.all([
+                    ['export', { HOME: `/home/${user}` }],
+                    externalCommand
+                ])
+            ],
+            'bash'
+        ]);
 
-    console.log(cmd);
-}
+        console.log(cmd);
+    });
 
-function test5() {
-    const cmd = Shell.command([
-        'bash',
-        '-c',
-        ['ls', '-la', { '--dir': '/ho me/foo' }]
-    ]);
+    it('test5', function test5() {
+        const cmd = Shell.command([
+            'bash',
+            '-c',
+            ['ls', '-la', { '--dir': '/ho me/foo' }]
+        ]);
 
-    console.log(cmd);
-}
+        expect(cmd.toString()).equal(`bash -c "ls -la --dir='/ho me/foo'"`);
+    });
+});
 
-test4();
+// test4();
 
 // let count = 0;
 // async function exec(cmd) {

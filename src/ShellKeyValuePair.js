@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const { quote } = require('shell-quote');
+const { quote } = require('commander-shelly-quote');
 const IShellCommand = require('./IShellCommand');
 
 class ShellKeyValuePair extends IShellCommand {
