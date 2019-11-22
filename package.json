@@ -1,6 +1,6 @@
 {
     "name": "commander-shelly",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A new way of writing Shell commands.",
     "main": "src",
     "scripts": {
@@ -31,7 +31,7 @@
         "lodash": "^4.17.15",
         "request": "^2.88.0",
         "request-promise-native": "^1.0.7",
-        "shell-quote": "git@github.com:claude-abounegm/node-shell-quote.git"
+        "shell-quote": "git+https://github.com/claude-abounegm/commander-shelly.git"
     },
     "devDependencies": {
         "chai": "^4.2.0",
