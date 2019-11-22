@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const { quote } = require('shell-quote');
 const IShellCommand = require('./IShellCommand');
 
 class ShellKeyValuePair extends IShellCommand {
@@ -32,7 +33,7 @@ class ShellKeyValuePair extends IShellCommand {
                     throw new Error('key needs to be a valid string');
                 }
 
-                return `${key}=${value}`;
+                return `${quote(key)}=${quote(value)}`;
             });
         }
 

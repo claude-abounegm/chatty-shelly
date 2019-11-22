@@ -48,9 +48,13 @@ class ShellCommand extends IShellCommand {
 
             for (let cmd of this._cmd) {
                 if (_.isString(cmd)) {
-                    args.push(cmd);
+                    args.push(quote(cmd));
                 } else if (cmd instanceof IShellCommand) {
                     let compiled = cmd.compile();
+
+                    if (cmd instanceof ShellCommand) {
+                        compiled = quote(compiled);
+                    }
 
                     if (!_.isArray(compiled)) {
                         compiled = [compiled];
@@ -62,7 +66,7 @@ class ShellCommand extends IShellCommand {
                 }
             }
 
-            this._compiled = quote(args);
+            this._compiled = args.join(' ');
         }
 
         return this._compiled;

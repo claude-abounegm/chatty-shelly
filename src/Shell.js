@@ -39,24 +39,3 @@ function and(cmds) {
 }
 
 module.exports = { command, commands, and, or, all, pipe };
-
-// class Raw extends BaseShell {
-//     constructor(cmd) {
-//         super();
-
-//         if (_.isArray(cmd)) {
-//             cmd = cmd.join(' ');
-//         }
-
-//         this._id = hash(cmd);
-//         this._cmd = cmd;
-//     }
-
-//     get cmd() {
-//         return this._id;
-//     }
-
-//     cleanup(str) {
-//         return str.replace(this._id, this.cmd);
-//     }
-// }

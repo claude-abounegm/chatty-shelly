@@ -1,7 +1,7 @@
 {
     "name": "commander-shelly",
-    "version": "1.0.0",
-    "description": "A new way of writing Shell commands, in an ORM-like manner.",
+    "version": "1.0.1",
+    "description": "A new way of writing Shell commands.",
     "main": "src",
     "scripts": {
         "start": "node ./src",
@@ -15,7 +15,6 @@
         "url": "git+https://github.com/claude-abounegm/commander-shelly.git"
     },
     "keywords": [
-        "ORM",
         "Node.js",
         "Shell",
         "Bash"
@@ -32,7 +31,7 @@
         "lodash": "^4.17.15",
         "request": "^2.88.0",
         "request-promise-native": "^1.0.7",
-        "shell-quote": "^1.7.2"
+        "shell-quote": "git@github.com:claude-abounegm/node-shell-quote.git"
     },
     "devDependencies": {
         "chai": "^4.2.0",

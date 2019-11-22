@@ -60,6 +60,16 @@ async function test4() {
     console.log(cmd);
 }
 
+function test5() {
+    const cmd = Shell.command([
+        'bash',
+        '-c',
+        ['ls', '-la', { '--dir': '/ho me/foo' }]
+    ]);
+
+    console.log(cmd);
+}
+
 test4();
 
 // let count = 0;
