@@ -1,6 +1,6 @@
 {
     "name": "commander-shelly",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "A new way of writing Shell commands.",
     "main": "src",
     "scripts": {
@@ -12,7 +12,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/claude-abounegm/node-shell-quote.git"
+        "url": "git+https://github.com/claude-abounegm/commander-shelly.git"
     },
     "keywords": [
         "Node.js",
